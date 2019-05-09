@@ -1,3 +1,6 @@
+
+
+
 require "colorize"
 require "colorized_string"
 
@@ -14,7 +17,8 @@ class Magic8ball
       "Maybe it will turn out ok, don't get your hopes up though.",
       "Could be.",
       "Go for it, the worst that could happen is that you die.",
-      "Nobody ever failed spectacularly if they didn't try."
+      "Nobody ever failed spectacularly if they didn't try.", 
+      "No."
     ]
 
     @responses = @default_responses    
@@ -27,7 +31,19 @@ class Magic8ball
   end
 
   def add_response(input)
-    @responses << input
+    is_duplicate = true
+    responses.each do |r|
+      if r = input
+        is_duplicate = true
+      end
+    end
+
+      if is_duplicate
+        puts "Duplicate not added"
+        sleep(3)
+      else
+        @responses << input
+      end
   end
 
   def view_responses
@@ -46,20 +62,21 @@ end
 
 def main
   system "clear"
-  #ColorizedString.color_samples
-  puts "QUIT".colorize(:cyan) + " or" + " OPEN 8 BALL".colorize(:cyan) + " (voids your warranty!)\n\n\n"
-  print "Please ask the all-knowing 8-Ball: ".colorize(:magenta)
+ #puts ColorizedString.modes
+  puts "QUIT".colorize(:green) + " or" + " OPEN 8 BALL".colorize(:green) + " (voids your warranty!)\n\n\n"
+  print "Please ask the all-knowing 8-Ball: ".colorize(:magenta).bold
   case gets.strip.downcase
   when "quit"
     system "clear"
-    puts "Nobody walks away from a magic 8 ball and lives to tell about it..."
+    puts "Nobody walks away from a magic 8 ball and lives to tell about it...".colorize(:magenta)
     sleep(3)
+    puts "Nobody.".colorize(:magenta).bold
     exit
   when "open 8 ball"
     system "clear"
-    puts "You have voided the warranty."
-    puts "Would you like to" + " VIEW".colorize(:cyan) +" or" + " ADD".colorize(:cyan) +" responses?"
-    puts "You can also" +" RESTORE".colorize(:cyan) + " the default responses."
+    puts "You have voided the warranty.".colorize(:red).bold
+    puts "\nWould you like to" + " VIEW".colorize(:green) +" or" + " ADD".colorize(:green) +" responses?"
+    puts "You can also" +" RESTORE".colorize(:green) + " the default responses."
     case gets.strip.downcase
     when "view"
       system "clear"
