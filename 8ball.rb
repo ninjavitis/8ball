@@ -1,4 +1,5 @@
 require "colorize"
+require "colorized_string"
 
 class Magic8ball
   attr_accessor :responses, :default_responses
@@ -31,12 +32,12 @@ class Magic8ball
 
   def view_responses
     @responses.each do |i|
-      puts i.colorize(:grey)
+      puts i.colorize(:light_black)
     end
   end
 
   def restore_defaults
-    @responses = default_responses.clone
+    @responses = @default_responses.clone
   end
 end
 
@@ -45,8 +46,9 @@ end
 
 def main
   system "clear"
-  puts "QUIT".colorize(:cyan) + " or" + " OPEN 8 BALL".colorize(:cyan) + " (voids your warranty!)"
-  print "Please ask the all-knowing 8-Ball: "
+  #ColorizedString.color_samples
+  puts "QUIT".colorize(:cyan) + " or" + " OPEN 8 BALL".colorize(:cyan) + " (voids your warranty!)\n\n\n"
+  print "Please ask the all-knowing 8-Ball: ".colorize(:magenta)
   case gets.strip.downcase
   when "quit"
     system "clear"
